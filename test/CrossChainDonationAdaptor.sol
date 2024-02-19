@@ -1,22 +1,19 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
-// import { PRBTest } from "@prb/test/src/PRBTest.sol";
-// import { console2 } from "forge-std/src/console2.sol";
-// import { StdCheats } from "forge-std/src/StdCheats.sol";
+import "forge-std/Test.sol";
+import { console2 } from "forge-std/console2.sol";
 
-// interface IERC20 {
-//     function balanceOf(address account) external view returns (uint256);
-// }
+interface IERC20 {
+    function balanceOf(address account) external view returns (uint256);
+}
 
-/// @dev If this is your first time with Forge, read this tutorial in the Foundry Book:
-/// https://book.getfoundry.sh/forge/writing-tests
-contract CrossChainDonationVotingMerkleDistributionDirectTransferStrategy is PRBTest, StdCheats {
+contract CrossChainDonationAdaptor is Test {
 
-    // /// @dev A function invoked before each test case is run.
-    // function setUp() public virtual {
-    //     // Instantiate the contract-under-test.
-    // }
+    /// @dev A function invoked before each test case is run.
+    function setUp() public virtual {
+        // Instantiate the contract-under-test.
+    }
 
     // /// @dev Basic test. Run it with `forge test -vvv` to see the console log.
     // function test_Example() external {
