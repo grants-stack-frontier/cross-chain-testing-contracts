@@ -17,8 +17,8 @@
     "prettier": "^3.0.0",
     "solhint": "^3.6.2",
     "solady": "^0.0.110",
-    "@connext/utils": "^7.3.17"
-
+    "@connext/utils": "^7.3.17",
+    "@types/bun": "latest"
   },
   "keywords": [
     "blockchain",
@@ -45,5 +45,10 @@
     "test": "forge test",
     "test:coverage": "forge coverage",
     "test:coverage:report": "forge coverage --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage"
+  },
+  "module": "index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }

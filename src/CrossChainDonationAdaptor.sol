@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.19;
 
-import {SwapForwarderXReceiver} from "@connext/contracts/destination/xreceivers/Swap/SwapForwarderXReceiver.sol";
+import {SwapForwarderXReceiver} from "connext-integration/contracts/destination/xreceivers/Swap/SwapForwarderXReceiver.sol";
 import {IStrategy} from "@allo/contracts/core/interfaces/IStrategy.sol";
 contract CrossChainDonationAdaptor is SwapForwarderXReceiver {
     function _forwardFunctionCall(
