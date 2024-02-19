@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.20;
 
-import {SwapForwarderXReceiver} from "connext-integration/contracts/destination/xreceivers/Swap/SwapForwarderXReceiver.sol";
+import {ForwarderXReceiver} from "connext-integration/contracts/destination/xreceivers/ForwarderXReceiver.sol";
 import {IStrategy} from "./interfaces/IStrategy.sol";
-contract CrossChainDonationAdaptor is SwapForwarderXReceiver {
-    constructor(address _connext) SwapForwarderXReceiver(_connext) {}
+contract CrossChainDonationAdaptor is ForwarderXReceiver {
+
+    constructor(address _connext) ForwarderXReceiver(_connext) {}
 
     function _forwardFunctionCall(
         bytes memory _preparedData,
@@ -16,11 +17,15 @@ contract CrossChainDonationAdaptor is SwapForwarderXReceiver {
         override
         returns (bool)
     {
-        (bytes memory _forwardCallData, uint256 _amountOut, address _alloStrategy) =
-            abi.decode(_preparedData, (bytes, uint256, address));
-        (bytes memory _data, address _sender) = abi.decode(_forwardCallData, (bytes, address));
+
+        (bytes memory _forwardCallData, , , ) =
+            abi.decode(_preparedData, (bytes, bytes32, uint256, address));
+
+        (bytes memory _alloData, address _alloStrategy, address _sender) =
+         abi.decode(_forwardCallData, (bytes, address, address));
         
-        IStrategy(_alloStrategy).allocate(_data, _sender);
+        IStrategy(_alloStrategy).allocate(_alloData, _sender);
+
         return true;
     }
 
