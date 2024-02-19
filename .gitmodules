@@ -7,3 +7,6 @@
 [submodule "allo-v2"]
 	path = allo-v2
 	url = https://github.com/allo-protocol/allo-v2
+[submodule "lib/connext-integration"]
+	path = lib/connext-integration
+	url = https://github.com/connext/connext-integration
