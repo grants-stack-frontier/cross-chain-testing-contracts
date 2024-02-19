@@ -1,19 +1,24 @@
 {
   "name": "@grants-stack-frontier/connext-cross-chain-testing",
-  "description": "",
+  "description": "Testing cross-chain allo-v2 allocations with connext",
   "version": "1.0.0",
   "author": {
     "name": "grants-stack-frontier",
     "url": "https://github.com/grants-stack-frontier"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.1"
+    "@connext/interfaces": "^2.0.5",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@openzeppelin/contracts-upgradeable": "^5.0.1"
   },
   "devDependencies": {
     "@prb/test": "^0.6.4",
     "forge-std": "github:foundry-rs/forge-std#v1.7.5",
     "prettier": "^3.0.0",
-    "solhint": "^3.6.2"
+    "solhint": "^3.6.2",
+    "solady": "^0.0.110",
+    "@connext/utils": "^7.3.17"
+
   },
   "keywords": [
     "blockchain",
@@ -22,7 +27,12 @@
     "foundry",
     "smart-contracts",
     "solidity",
-    "template"
+    "template",
+    "allo",
+    "gitcoin",
+    "raid-guild",
+    "connext",
+    "cross-chain"
   ],
   "private": true,
   "scripts": {

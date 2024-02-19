@@ -1,3 +1,7 @@
 @openzeppelin/contracts/=node_modules/@openzeppelin/contracts/
 @prb/test/=node_modules/@prb/test/
 forge-std/=node_modules/forge-std/
+@connext=lib/chain-abstraction-integration/
+@allo=lib/allo-v2/contracts/
+permit2=lib/permit2/src/
+solady=lib/solady/src/

@@ -1,0 +1,9 @@
+[submodule "solady"]
+	path = lib/solady
+	url = https://github.com/vectorized/solady
+[submodule "permit2"]
+	path = lib/permit2
+	url = https://github.com/Uniswap/permit2
+[submodule "allo-v2"]
+	path = allo-v2
+	url = https://github.com/allo-protocol/allo-v2
