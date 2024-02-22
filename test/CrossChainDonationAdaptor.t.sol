@@ -16,8 +16,10 @@ contract CrossChainDonationAdaptorTest is Test, Optimism_Addresses {
     function setUp() public virtual {
         // fork optimism
         string memory alchemyApiKey = vm.envOr("API_KEY_ALCHEMY", string(""));
-        // block # 116393210 is Feb-19-2024 11:26:37 PM +UTC
-        vm.createSelectFork({ urlOrAlias: "optimism", blockNumber: 116_393_210 });
+        // block # 116393210 is (Feb-22-2024 02:16:21 PM +UTC)
+        uint256 optimisms = vm.createSelectFork({ urlOrAlias: "optimism", blockNumber: 116_506_302 });
+        // arb block # 183361773 is (Feb-22-2024 02:15:02 PM +UTC)
+        uint256 arbitrums = vm.createFork({ urlOrAlias: "arbitrum", blockNumber: 183_361_773 });
         //deploy adaptor        
         xChainAdaptor = new CrossChainDonationAdaptor(Connext_Core);
     }
