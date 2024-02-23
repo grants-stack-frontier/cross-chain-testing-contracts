@@ -2,7 +2,7 @@
 pragma solidity 0.8.20;
 
 import {ForwarderXReceiver} from "connext-integration/contracts/destination/xreceivers/ForwarderXReceiver.sol";
-import {IStrategy} from "./interfaces/IStrategy.sol";
+import {IAllo} from "./interfaces/IAllo.sol";
 contract CrossChainDonationAdaptor is ForwarderXReceiver {
     address public alloV2;
     constructor(address _connext, address _allo) ForwarderXReceiver(_connext) {
