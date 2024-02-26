@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.20;
+pragma solidity 0.8.23;
 
 import {ForwarderXReceiver} from "connext-integration/contracts/destination/xreceivers/ForwarderXReceiver.sol";
 import {IAllo} from "./interfaces/IAllo.sol";
