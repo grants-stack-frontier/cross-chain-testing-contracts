@@ -3,7 +3,7 @@ pragma solidity ^0.8.17;
 
 import "forge-std/Test.sol";
 import { console2 } from "forge-std/console2.sol";
-import { CrossChainDonationAdaptor } from "../src/CrossChainDonationAdaptor.sol";
+import { CrossChainDonationAdapter } from "../src/CrossChainDonationAdapter.sol";
 import { Contract_Addresses } from "./ForkAddresses.sol";
 import { IConnext } from "@connext/interfaces/core/IConnext.sol";
 import { IAllo } from "../src/interfaces/IAllo.sol";
@@ -15,7 +15,7 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
 }
 
-contract CrossChainDonationAdaptorTest is Test, Contract_Addresses {
+contract CrossChainDonationAdapterTest is Test, Contract_Addresses {
     using PermitHash for ISignatureTransfer.PermitTransferFrom;
 
     bytes32 public constant _TOKEN_PERMISSIONS_TYPEHASH = keccak256("TokenPermissions(address token,uint256 amount)");
@@ -30,7 +30,7 @@ contract CrossChainDonationAdaptorTest is Test, Contract_Addresses {
     bytes32 public constant DOMAIN_SEPARATOR_TYPEHASH =
         0x3c1b4b0682de90d9bc6435f35e24487dca850cf87201701cc3d3ebacf9cbd92d;
 
-    CrossChainDonationAdaptor public xChainAdaptor;
+    CrossChainDonationAdapter public xChainAdaptor;
     uint256 optimisms;
     uint256 arbitrums;
 
@@ -67,7 +67,7 @@ contract CrossChainDonationAdaptorTest is Test, Contract_Addresses {
         console.log("Voter: ", voter);
 
         mockAllo = address(new MockAllo());
-        xChainAdaptor = new CrossChainDonationAdaptor(Connext_Core_OPT, mockAllo);
+        xChainAdaptor = new CrossChainDonationAdapter(Connext_Core_OPT, mockAllo);
     }
 
     function test_receiveVote() external {

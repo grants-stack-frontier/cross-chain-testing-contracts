@@ -11,6 +11,13 @@
 
 A Foundry-based template for developing Solidity smart contracts, with sensible defaults.
 
+## Deployments
+
+MockAllo
+[0xfB1eD3Fe2978c8aCf1cBA19145D7349A4730EfAd](https://optimistic.etherscan.io/address/0xfB1eD3Fe2978c8aCf1cBA19145D7349A4730EfAd)
+CrossChainDonationAdapter
+[0x8795b9E65C9dbe0934CE537b39359c21dc81Cf54](https://optimistic.etherscan.io/address/0x8795b9e65c9dbe0934ce537b39359c21dc81cf54)
+
 ## What's Inside
 
 - [Forge](https://github.com/foundry-rs/foundry/blob/master/forge): compile, test, fuzz, format, and deploy smart

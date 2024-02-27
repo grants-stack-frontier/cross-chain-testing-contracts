@@ -10,11 +10,8 @@ import { SignatureTransfer } from "permit2/SignatureTransfer.sol";
 contract MockAllo is IAllo {
     using PermitHash for ISignatureTransfer.PermitTransferFrom;
 
-    SignatureTransfer public signatureTransfer;
-
-    constructor() {
-        signatureTransfer = new SignatureTransfer();
-    }
+    // solhint-disable-next-line no-empty-blocks
+    constructor() { }
 
     function allocate(uint256 poolId, address voter, bytes memory data) external payable {
         // allocateData parameters:
@@ -29,7 +26,6 @@ contract MockAllo is IAllo {
         uint256 deadline = p2Data.permit.deadline;
 
         //TODO verify signature signer
-        // console.log("Verifying signature");
         // this.verify(p2Data.signature, permitData.hash(), voter);
 
         emit VoteReceived(voter, poolId, amount, data);
