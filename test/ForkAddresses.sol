@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 contract Contract_Addresses {
     //ALLO DEPLOYMENTS (same on all chains);
@@ -21,7 +21,6 @@ contract Contract_Addresses {
     address public USDC_TOKEN_ARB = 0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8;
     address public WETH_ARB = 0x82aF49447D8a07e3bd95BD0d56f35241523fBab1;
     address public WETH_Unwrapper_ARB = 0x429b9eb01362b2799131EfCC44319689b662999D;
-
 
     //addresses for fork tests
     address public USDC_WHALE_OPT = 0xDecC0c09c3B5f6e92EF4184125D5648a66E35298;
