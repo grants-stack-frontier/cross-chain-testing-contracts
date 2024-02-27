@@ -1,16 +1,25 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.23;
 
-import {IAllo} from "./interfaces/IAllo.sol";
+import { IAllo } from "./interfaces/IAllo.sol";
+
+
 contract MockAllo is IAllo {
+    // solhint-disable-next-line no-empty-blocks
+    constructor() { }
 
-    constructor() {
-    }
+    function allocate(uint256 poolId, address allocator, bytes calldata data) external payable {
+        // allocateData parameters:
+        // address, (((address, uint256), uint256, uint256), bytes)
+        // recipientId, (((token, amount), nonce, deadline), signature)
 
-    function allocate(uint256 poolId, bytes calldata data)external payable{
-        (address voter, uint256 amount, bytes memory preparedData) = abi.decode(data, (address, uint256, bytes));
+        (
+            address recipientId,
+            (((address token, uint256 amount), uint256 nonce, uint256 deadline), bytes memory signature)
+        ) = abi.decode(data, (address, (((address, uint256), uint256, uint256), bytes)));
+
+
+        
         emit VoteReceived(voter, poolId, amount, preparedData);
-
     }
-
 }
