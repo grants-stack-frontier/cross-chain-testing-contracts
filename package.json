@@ -1,19 +1,24 @@
 {
   "name": "@grants-stack-frontier/connext-cross-chain-testing",
-  "description": "",
+  "description": "Testing cross-chain allo-v2 allocations with connext",
   "version": "1.0.0",
   "author": {
     "name": "grants-stack-frontier",
     "url": "https://github.com/grants-stack-frontier"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.1"
+    "@connext/interfaces": "^2.0.5",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@openzeppelin/contracts-upgradeable": "^5.0.1"
   },
   "devDependencies": {
     "@prb/test": "^0.6.4",
     "forge-std": "github:foundry-rs/forge-std#v1.7.5",
     "prettier": "^3.0.0",
-    "solhint": "^3.6.2"
+    "solhint": "^3.6.2",
+    "solady": "^0.0.110",
+    "@connext/utils": "^7.3.17",
+    "@types/bun": "latest"
   },
   "keywords": [
     "blockchain",
@@ -22,12 +27,19 @@
     "foundry",
     "smart-contracts",
     "solidity",
-    "template"
+    "template",
+    "allo",
+    "gitcoin",
+    "raid-guild",
+    "connext",
+    "cross-chain"
   ],
   "private": true,
   "scripts": {
     "clean": "rm -rf cache out",
     "build": "forge build",
+    "deploy:optimism:dryrun": "forge script script/Deploy.s.sol:Deploy -vvvv --fork-url optimism",
+    "deploy:optimism": "forge script script/Deploy.s.sol:Deploy --broadcast --verify -vvvv --fork-url optimism",
     "lint": "bun run lint:sol && bun run prettier:check",
     "lint:sol": "forge fmt --check && bun solhint {script,src,test}/**/*.sol",
     "prettier:check": "prettier --check **/*.{json,md,yml} --ignore-path=.prettierignore",
@@ -35,5 +47,10 @@
     "test": "forge test",
     "test:coverage": "forge coverage",
     "test:coverage:report": "forge coverage --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage"
+  },
+  "module": "index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }

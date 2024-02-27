@@ -1,0 +1,9 @@
+[submodule "lib/connext-integration"]
+	path = lib/connext-integration
+	url = https://github.com/connext/connext-integration
+[submodule "lib/allo-v2"]
+	path = lib/allo-v2
+	url = https://github.com/allo-protocol/allo-v2
+[submodule "lib/permit2"]
+	path = lib/permit2
+	url = https://github.com/Uniswap/permit2
