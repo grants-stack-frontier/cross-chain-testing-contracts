@@ -5,6 +5,7 @@ import { MockAllo } from "../src/MockAllo.sol";
 import { CrossChainDonationAdapter } from "../src/CrossChainDonationAdapter.sol";
 
 import { BaseScript } from "./Base.s.sol";
+import "forge-std/console2.sol";
 
 error UnsupportedChainId();
 
@@ -13,9 +14,15 @@ contract Deploy is BaseScript {
     address public connextCore;
 
     function run() public broadcast returns (MockAllo allo, CrossChainDonationAdapter adapter) {
-        if (block.chainid != 10) revert UnsupportedChainId();
+        console2.log(block.chainid);
+        if (block.chainid != 10  && block.chainid != 42161) revert UnsupportedChainId();
 
-        if (block.chainid == 10) connextCore = 0x8f7492DE823025b4CfaAB1D34c58963F2af5DEDA;
+        if (block.chainid == 10) {
+            connextCore = 0x8f7492DE823025b4CfaAB1D34c58963F2af5DEDA;
+        } else if (block.chainid == 42161){
+
+            connextCore == 0xEE9deC2712cCE65174B561151701Bf54b99C24C8;
+        }
 
         allo = new MockAllo();
         adapter = new CrossChainDonationAdapter(connextCore, address(allo));

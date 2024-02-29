@@ -40,6 +40,7 @@
     "build": "forge build",
     "deploy:optimism:dryrun": "forge script script/Deploy.s.sol:Deploy -vvvv --fork-url optimism",
     "deploy:optimism": "forge script script/Deploy.s.sol:Deploy --broadcast --verify -vvvv --fork-url optimism",
+    "deploy:arbitrum": "forge script script/Deploy.s.sol:Deploy --broadcast --verify -vvvv --fork-url arbitrum",
     "lint": "bun run lint:sol && bun run prettier:check",
     "lint:sol": "forge fmt --check && bun solhint {script,src,test}/**/*.sol",
     "prettier:check": "prettier --check **/*.{json,md,yml} --ignore-path=.prettierignore",
