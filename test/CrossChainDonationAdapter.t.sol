@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.17;
 
-import "forge-std/Test.sol";
-import { console2 } from "forge-std/console2.sol";
+
 import { CrossChainDonationAdapter } from "../src/CrossChainDonationAdapter.sol";
 import { Contract_Addresses } from "./ForkAddresses.sol";
-import { IConnext } from "@connext/interfaces/core/IConnext.sol";
-import { IAllo } from "../src/interfaces/IAllo.sol";
 import { ISignatureTransfer } from "permit2/interfaces/ISignatureTransfer.sol";
 import { PermitHash } from "permit2/libraries/PermitHash.sol";
 import { MockAllo } from "../src/MockAllo.sol";
+import "forge-std/Test.sol";
 
 interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
