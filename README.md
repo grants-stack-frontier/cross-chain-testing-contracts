@@ -1,22 +1,62 @@
-# Foundry Template [![Open in Gitpod][gitpod-badge]][gitpod] [![Github Actions][gha-badge]][gha] [![Foundry][foundry-badge]][foundry] [![License: MIT][license-badge]][license]
+# Cross Chain Donation Adapters
 
-[gitpod]: https://gitpod.io/#https://github.com/grants-stack-frontier/connext-cross-chain-testing
-[gitpod-badge]: https://img.shields.io/badge/Gitpod-Open%20in%20Gitpod-FFB45B?logo=gitpod
-[gha]: https://github.com/grants-stack-frontier/connext-cross-chain-testing/actions
-[gha-badge]: https://github.com/grants-stack-frontier/connext-cross-chain-testing/actions/workflows/ci.yml/badge.svg
-[foundry]: https://getfoundry.sh/
-[foundry-badge]: https://img.shields.io/badge/Built%20with-Foundry-FFDB1C.svg
-[license]: https://opensource.org/licenses/MIT
-[license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
+The contracts in this repository are Proof of Concepts of cross-chain bridging solutions. We've implemented a simple mock af the AlloV2 `allocate` method and created an adapter contract to support the Connext donation flow.
 
-A Foundry-based template for developing Solidity smart contracts, with sensible defaults.
+
+> [!WARNING]  
+> This is not suitable for production and comes with issues. We've deployed to production nets to get accurate cost estimates without trying to find a way around testnet API.
+
+
+## Architecture
+
+The process involves:
+- The user: the person who wants to donate tokens.
+- The bridge: the contract that will receive the tokens and send them to the recipient on another chain.
+- The round: a round instance on the AlloV2 protocol.
+- The recipient: the person who will receive the tokens on another chain as part of the grants round they're participating in.
+- The source chain: the chain where the tokens are currently located.
+- The target chain: the chain where the recipient is participating in a grants round.
+- The adapter contract: a Connext specific contract that executes validations and supports custom logic.
+
+When executing a cross-chain donation vote, the following steps are taken:
+
+- The user specifies the amount of tokens to donate, the address of the token to donate, and the address of the recipient.
+- The user creates a donation vote transaction using the API of the bridging solution.
+- The user signs the transaction with their wallet and sends it to the bridge.
+- The bridge receives the transaction and verifies the signature.
+- The bridge receives the tokens and sends them to the target contract on the target chain.
+
+On the target chain, the flow is different between the different bridging solutions. 
+
+In the case of Connext, the adapter contract is the `CrossChainDonationAdapter` contract which receives the tokens and the calldata.
+
+- The bridge sends the tokens to the adapter contract. 
+- The adapter contract receives the tokens and the calldata, validates the data and executes the custom logic on the Allo contract.
+- Tokens are received by the adapter contract and relayed to the recipient via the Allo contract.
+
+In the case of LiFi and Decent, there is no adapter contract and the bridge could execute calls directly onto the Allo contract.
+
+- The bridge sends the tokens to the Allo contract.
+- The Allo contract receives the tokens and the calldata, validates the data and executes the custom logic.
+
+> This has the caveat that the tokens will be owned by Allo and should be routed out of the Allo contract to the recipient.
+
+## Contracts
+
+- CrossChainDonationAdapter: the adapter contract that receives the tokens and the calldata, validates the data and executes the custom logic on the Allo contract.
+- MockAllo: a mock of the AlloV2 contract that implements the `allocate` method.
+
 
 ## Deployments
 
-MockAllo
-[0xfB1eD3Fe2978c8aCf1cBA19145D7349A4730EfAd](https://optimistic.etherscan.io/address/0xfB1eD3Fe2978c8aCf1cBA19145D7349A4730EfAd)
-CrossChainDonationAdapter
-[0x8795b9E65C9dbe0934CE537b39359c21dc81Cf54](https://optimistic.etherscan.io/address/0x8795b9e65c9dbe0934ce537b39359c21dc81cf54)
+| Network  | Contract                  | Address                                                                                                                          |
+| -------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Optimism | MockAllo                  | [0xfB1eD3Fe2978c8aCf1cBA19145D7349A4730EfAd](https://optimistic.etherscan.io/address/0xfB1eD3Fe2978c8aCf1cBA19145D7349A4730EfAd) |
+| Optimism | CrossChainDonationAdapter | [0x8795b9E65C9dbe0934CE537b39359c21dc81Cf54](https://optimistic.etherscan.io/address/0x8795b9e65c9dbe0934ce537b39359c21dc81cf54) |
+| Polygon  | MockAllo                  | [0x0a0DF97bDdb36eeF95fef089A4aEb7acEaBF2101](https://polygonscan.com/address/0x0a0DF97bDdb36eeF95fef089A4aEb7acEaBF2101)         |
+| Polygon  | CrossChainDonationAdapter | [0xa16DFb32Eb140a6f3F2AC68f41dAd8c7e83C4941](https://polygonscan.com/address/0xa16DFb32Eb140a6f3F2AC68f41dAd8c7e83C4941)         |
+| Arbitrum | MockAllo                  | [0x0a0DF97bDdb36eeF95fef089A4aEb7acEaBF2101](https://arbiscan.io/address/0x0a0df97bddb36eef95fef089a4aeb7aceabf2101)             |
+| Arbitrum | CrossChainDonationAdapter | [0xa16DFb32Eb140a6f3F2AC68f41dAd8c7e83C4941](https://arbiscan.io/address/0xa16dfb32eb140a6f3f2ac68f41dad8c7e83c4941)             |
 
 ## What's Inside
 
